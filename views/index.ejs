@@ -4,19 +4,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Express con EJS</title>
+  <title>Negocio  </title>
 
   <style>
     body {
-      font-family: 'Arial', sans-serif;
-      margin: 10px;
-      padding: 10px;
+      font-family: "Montserrat", sans-serif;
+      margin: 0 ;
+      padding: 0;
       align-items: center;
       justify-content: center;
       height: 70vh;
       background-color: #f5f5f5;
       flex-direction: column;
+      box-sizing: border-box;
+
     }
+    
+
+
+    
+
+    header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 5rem;
+    background: linear-gradient(180deg, #6fb4fd 0%, #5caafc 100%);
+}
+
+.brand a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    list-style-type: none;
+    margin-left: 3rem;
+}
+
+li > a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+
+li::after {
+    content: '';
+    width: 0rem;
+    height: 0.15rem;
+    background-color: #fff;
+    display: block;
+    border-radius: 0.2rem;
+    margin: 0.2rem auto 0 auto;
+    transition: all 0.3s ease-in-out;
+}
+
+li:hover::after {
+    width: 2rem;
+}
 
     .card {
       background-color: #fff;
@@ -24,7 +78,7 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       width: 230px;
-      margin: 15px;
+      margin: 20px;
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -41,6 +95,8 @@
 
     .card-info {
       margin-top: 10px;
+      text-align: center;
+
     }
 
     .card-info p {
@@ -49,13 +105,13 @@
     }
 
     .price {
-      color: #e44d26;
+      color: #347dca;
       font-size: 1.5em;
       font-weight: bold;
     }
 
     button {
-      background-color: #e44d26;
+      background-color: #5caafc;
       color: #fff;
       border: none;
       padding: 10px 15px;
@@ -80,11 +136,11 @@
 
     .cantidad {
       margin: 15px;
-      width: 50px;
+      width: 31px;
+    height: 33px;
       border-radius: 2px;
       text-align: center;
-      border: 1px solid;
-
+      border: 1px solid ;
     }
   
 
@@ -95,14 +151,27 @@
     }
 
     form button {
-      width: 250px;
-      margin: 50px;
+      margin:1px;
     }
 
     h1 {
       text-align: center;
 
     }
+
+    .cantidad {
+      width: 50px;
+    }
+
+    footer {
+      background-color: #5caafc;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      margin-top: 4%;
+    }
+
+
 
 
   </style>
@@ -111,49 +180,57 @@
 
 <body>
 
+  <header>
+    <div class="brand"><a href="#">NavBar</a></div>
+
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Base de datos</a></li>
+            <li><a href="#"> Categorias </a></li>
+            <li><a href="#"> Sección</a></li>
+        </ul>
+    </nav>
+</header>
+<br>
+
   <h1>Lista de Artículos</h1>
 
 
   <form id="pedidoForm" action="/crear-pedido" method="post" enctype="application/x-www-form-urlencoded">
     <article class="productos">
-
-      <% for (let i=0; i < articulos.length; i++) { %>
+      <% for (let i = 0; i < articulos.length; i++) { %>
 
         <div class="card">
-          <img
-            src="https://uxwing.com/wp-content/themes/uxwing/download/logistics-shipping-delivery/search-product-icon.png"
-            style="width: 50%">
+  
           <div class="card-info">
             <label for="nombre">
               <input name="nombre" value="<%= articulos[i].nombre %>" type="hidden">
               <%= articulos[i].nombre %>
             </label>
-
+  
             <label for="precio">
               <input name="precio" value="<%= articulos[i].precio %>" type="hidden" class="price">
-              <p class="price">$<%= articulos[i].precio %>
-              </p>
+              <p class="price">$<%= articulos[i].precio %></p>
             </label>
           </div>
-
+  
           <label for="cantidad">
-            <span class="operation" data-operation="-">-</span>
+            <button type="button" class="operation" data-operation="-">-</button>
             <input class="cantidad" name="cantidad" type="text" inputmode="numeric" pattern="[0-9]*" value="0">
-
-            <span class="operation" data-operation="+">+</span>
+            <button type="button" class="operation" data-operation="+">+</button>
           </label>
-
-        </div>
-
-
-        <% } %>
+  
+        </div> <!-- Fin de la tarjeta -->
+  
+      <% } %>
     </article>
     <button type="submit">Crear pedido</button>
 
   </form>
 
 
-
+  <footer>    © 2023  | Todos los derechos reservados  </footer>
 
 </body>
 
